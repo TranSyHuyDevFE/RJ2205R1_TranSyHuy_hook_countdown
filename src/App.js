@@ -1,22 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import { useState, useEffect } from "react";
 function App() {
+  const [count, setCountDown] = useState(10);
+  useEffect(() => {
+    if (count === 0) {
+      alert("Time up!");
+      return;
+    }
+    var timer = setInterval(() => {
+      setCountDown(count - 1);
+    }, 1000);
+    return () => {
+      clearInterval(timer);
+    };
+  });
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <span>{count}</span>
       </header>
     </div>
   );
